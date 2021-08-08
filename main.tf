@@ -6,7 +6,7 @@
  * **Note**: This module will generate an SSH keypair and it will be stored unencrypted in the Terraform state.
  * Make sure to that only authorized users have direct access to the Terraform state.
  *
- * It is highly recommended to use a remote state backend supporting encryption at rest.
+ * It is highly recommended to use a remote state backend supporting encryption at rest. See [References](#references) for more information.
  */
 
 terraform {
