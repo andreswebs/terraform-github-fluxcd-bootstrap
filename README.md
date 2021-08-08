@@ -6,7 +6,7 @@ Deploys the FluxCD toolkit on Kubernetes and stores the manifests in an existing
 An SSH public key will be added to the existing GitHub repository.
 
 **Note**: This module will generate an SSH keypair and it will be stored unencrypted in the Terraform state.
-Make sure to that only authorized users have direct access to the Terraform state.
+Make sure that only authorized users have direct access to the Terraform state.
 
 It is highly recommended to use a remote state backend supporting encryption at rest. See [References](#references) for more information.
 
@@ -15,6 +15,15 @@ It is highly recommended to use a remote state backend supporting encryption at 
 Example:
 
 ```hcl
+provider "github" {
+  token = var.github_token # or `GITHUB_TOKEN`
+}
+
+provider "kubernetes" {
+  config_path    = "~/.kube/config"
+  config_context = "my-context"
+}
+
 module "fluxcd" {
   source                  = "github.com/andreswebs/terraform-github-fluxcd-bootstrap"
   git_repository_name     = "k8s-fleet"
@@ -42,6 +51,8 @@ module "fluxcd" {
 | <a name="input_github_deploy_key_title"></a> [github\_deploy\_key\_title](#input\_github\_deploy\_key\_title) | GitHub deploy key title | `string` | `"flux-key"` | no |
 | <a name="input_github_owner"></a> [github\_owner](#input\_github\_owner) | GitHub owner | `string` | n/a | yes |
 | <a name="input_k8s_namespace"></a> [k8s\_namespace](#input\_k8s\_namespace) | Name of the Kubernetes namespace where the resources will be deployed | `string` | `"flux-system"` | no |
+| <a name="input_k8s_namespace_annotations"></a> [k8s\_namespace\_annotations](#input\_k8s\_namespace\_annotations) | Annotations to apply to the Kubernetes namespace when it is created | `map(string)` | `{}` | no |
+| <a name="input_k8s_namespace_labels"></a> [k8s\_namespace\_labels](#input\_k8s\_namespace\_labels) | Labels to apply to the Kubernetes namespace when it is created | `map(string)` | `{}` | no |
 | <a name="input_ssh_known_hosts_file"></a> [ssh\_known\_hosts\_file](#input\_ssh\_known\_hosts\_file) | Path to a temporary file storing GitHub's known hosts | `string` | `"/tmp/known_hosts"` | no |
 
 ## Modules
@@ -63,8 +74,8 @@ No modules.
 | <a name="provider_github"></a> [github](#provider\_github) | >= 4.13.0 |
 | <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | >= 1.11.3 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | >= 2.4.1 |
-| <a name="provider_local"></a> [local](#provider\_local) | n/a |
-| <a name="provider_null"></a> [null](#provider\_null) | n/a |
+| <a name="provider_local"></a> [local](#provider\_local) | 2.1.0 |
+| <a name="provider_null"></a> [null](#provider\_null) | 3.1.0 |
 | <a name="provider_tls"></a> [tls](#provider\_tls) | >= 3.1.0 |
 
 ## Requirements
@@ -76,6 +87,8 @@ No modules.
 | <a name="requirement_github"></a> [github](#requirement\_github) | >= 4.13.0 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | >= 1.11.3 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.4.1 |
+| <a name="requirement_local"></a> [local](#requirement\_local) | 2.1.0 |
+| <a name="requirement_null"></a> [null](#requirement\_null) | 3.1.0 |
 | <a name="requirement_tls"></a> [tls](#requirement\_tls) | >= 3.1.0 |
 
 ## Resources
@@ -90,15 +103,15 @@ No modules.
 | [kubectl_manifest.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/resources/manifest) | resource |
 | [kubernetes_namespace.flux](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
 | [kubernetes_secret.sync_ssh](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
-| [null_resource.k8s_namespace](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
-| [null_resource.ssh_scan](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
+| [null_resource.k8s_namespace](https://registry.terraform.io/providers/hashicorp/null/3.1.0/docs/resources/resource) | resource |
+| [null_resource.ssh_scan](https://registry.terraform.io/providers/hashicorp/null/3.1.0/docs/resources/resource) | resource |
 | [tls_private_key.this](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |
 | [flux_install.this](https://registry.terraform.io/providers/fluxcd/flux/latest/docs/data-sources/install) | data source |
 | [flux_sync.this](https://registry.terraform.io/providers/fluxcd/flux/latest/docs/data-sources/sync) | data source |
 | [github_repository.this](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/repository) | data source |
 | [kubectl_file_documents.install](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/data-sources/file_documents) | data source |
 | [kubectl_file_documents.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/data-sources/file_documents) | data source |
-| [local_file.known_hosts](https://registry.terraform.io/providers/hashicorp/local/latest/docs/data-sources/file) | data source |
+| [local_file.known_hosts](https://registry.terraform.io/providers/hashicorp/local/2.1.0/docs/data-sources/file) | data source |
 
 [//]: # (END_TF_DOCS)
 
