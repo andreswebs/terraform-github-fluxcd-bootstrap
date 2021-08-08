@@ -1,3 +1,12 @@
+provider "github" {
+  token = var.github_token # or `GITHUB_TOKEN`
+}
+
+provider "kubernetes" {
+  config_path    = "~/.kube/config"
+  config_context = "my-context"
+}
+
 module "fluxcd" {
   source                  = "github.com/andreswebs/terraform-github-fluxcd-bootstrap"
   git_repository_name     = "k8s-fleet"
