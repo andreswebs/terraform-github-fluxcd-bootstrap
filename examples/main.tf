@@ -1,4 +1,4 @@
-module "fluxcd_resources" {
+module "fluxcd" {
   source                  = "github.com/andreswebs/terraform-github-fluxcd-bootstrap"
   git_repository_name     = "k8s-fleet"
   git_branch              = "main"

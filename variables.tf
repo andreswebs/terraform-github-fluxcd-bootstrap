@@ -4,6 +4,18 @@ variable "k8s_namespace" {
   description = "Name of the Kubernetes namespace where the resources will be deployed"
 }
 
+variable "k8s_namespace_labels" {
+  type        = map(string)
+  default     = {}
+  description = "Labels to apply to the Kubernetes namespace when it is created"
+}
+
+variable "k8s_namespace_annotations" {
+  type        = map(string)
+  default     = {}
+  description = "Annotations to apply to the Kubernetes namespace when it is created"
+}
+
 variable "create_namespace" {
   type        = bool
   description = "Create the Kubernetes namespace?"
@@ -57,13 +69,13 @@ variable "github_deploy_key_title" {
 }
 
 variable "ssh_known_hosts_file" {
-  type = string
-  default = "/tmp/known_hosts"
+  type        = string
+  default     = "/tmp/known_hosts"
   description = "Path to a temporary file storing GitHub's known hosts"
 }
 
 variable "github_deploy_key_readonly" {
-  type = bool
-  default = true
+  type        = bool
+  default     = true
   description = "Set the GitHub deploy key as read-only?"
 }

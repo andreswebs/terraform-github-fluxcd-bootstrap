@@ -4,6 +4,6 @@ output "namespace" {
 }
 
 output "deploy_key" {
-  value = tls_private_key.this
+  value       = tls_private_key.this
   description = "SSH key added to the GitHub repository"
 }

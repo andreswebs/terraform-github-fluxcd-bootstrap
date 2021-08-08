@@ -15,7 +15,7 @@ It is highly recommended to use a remote state backend supporting encryption at 
 Example:
 
 ```hcl
-module "fluxcd_resources" {
+module "fluxcd" {
   source                  = "github.com/andreswebs/terraform-github-fluxcd-bootstrap"
   git_repository_name     = "k8s-fleet"
   git_branch              = "main"

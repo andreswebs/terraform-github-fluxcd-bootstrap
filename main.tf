@@ -4,7 +4,7 @@
  * An SSH public key will be added to the existing GitHub repository.
  * 
  * **Note**: This module will generate an SSH keypair and it will be stored unencrypted in the Terraform state.
- * Make sure to that only authorized users have direct access to the Terraform state.
+ * Make sure that only authorized users have direct access to the Terraform state.
  *
  * It is highly recommended to use a remote state backend supporting encryption at rest. See [References](#references) for more information.
  */
@@ -40,6 +40,16 @@ terraform {
       version = ">= 0.2.2"
     }
 
+    local = {
+      source  = "hashicorp/local"
+      version = "2.1.0"
+    }
+
+    null = {
+      source  = "hashicorp/null"
+      version = "3.1.0"
+    }
+
   }
 }
 
@@ -52,13 +62,9 @@ locals {
 resource "kubernetes_namespace" "flux" {
   count = var.create_namespace ? 1 : 0
   metadata {
-    name = local.k8s_namespace_norm
-  }
-
-  lifecycle {
-    ignore_changes = [
-      metadata[0].labels,
-    ]
+    name        = local.k8s_namespace_norm
+    labels      = var.k8s_namespace_labels
+    annotations = var.k8s_namespace_annotations
   }
 }
 
@@ -106,7 +112,7 @@ resource "null_resource" "ssh_scan" {
 
 data "local_file" "known_hosts" {
   depends_on = [null_resource.ssh_scan]
-  filename = var.ssh_known_hosts_file
+  filename   = var.ssh_known_hosts_file
 }
 
 ## end github repository
@@ -191,7 +197,7 @@ resource "github_repository_file" "kustomize" {
 }
 
 resource "kubernetes_secret" "sync_ssh" {
-  
+
   metadata {
     name      = data.flux_sync.this.name
     namespace = data.flux_sync.this.namespace
