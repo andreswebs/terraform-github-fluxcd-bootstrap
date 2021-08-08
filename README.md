@@ -14,4 +14,4 @@ This project is licensed under the [Unlicense](UNLICENSE.md).
 
 ## References
 
-
+<https://www.terraform.io/docs/language/state/sensitive-data.html>
