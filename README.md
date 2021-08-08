@@ -1,4 +1,4 @@
-# tf-module-template
+# terraform-github-fluxcd-bootstrap
 
 [//]: # (BEGIN_TF_DOCS)
 
@@ -6,6 +6,12 @@
 
 ## Authors
 
+**Andre Silva** - [@andreswebs](https://github.com/andreswebs)
+
 ## License
 
 This project is licensed under the [Unlicense](UNLICENSE.md).
+
+## References
+
+
