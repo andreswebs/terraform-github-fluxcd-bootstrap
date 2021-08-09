@@ -64,7 +64,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_deploy_key"></a> [deploy\_key](#output\_deploy\_key) | SSH key added to the GitHub repository |
 | <a name="output_namespace"></a> [namespace](#output\_namespace) | The name (metadata.name) of the namespace |
 
 ## Providers
