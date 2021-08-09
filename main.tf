@@ -114,14 +114,14 @@ resource "null_resource" "ssh_scan" {
   }
 
   provisioner "local-exec" {
-    command = "ssh-keyscan ${var.flux_ssh_scan_url} > ${var.ssh_known_hosts_file}"
+    command = "ssh-keyscan ${var.github_ssh_domain} > ${var.github_ssh_known_hosts_file}"
   }
 
 }
 
 data "local_file" "known_hosts" {
   depends_on = [null_resource.ssh_scan]
-  filename   = var.ssh_known_hosts_file
+  filename   = var.github_ssh_known_hosts_file
 }
 
 ## end github repository
@@ -129,13 +129,23 @@ data "local_file" "known_hosts" {
 ## flux install
 
 data "flux_install" "this" {
-  target_path    = var.git_target_path
-  network_policy = var.flux_install_network_policy
-  version        = var.flux_version
+  version              = var.flux_version
+  namespace            = local.k8s_namespace
+  target_path          = var.git_target_path
+  network_policy       = var.flux_install_network_policy
+  watch_all_namespaces = var.flux_watch_all_namespaces
+  cluster_domain       = var.k8s_cluster_domain
+  log_level            = var.flux_log_level
+  registry             = var.flux_registry
+  image_pull_secrets   = var.flux_image_pull_secrets
+
+  ## TODO:
+  # components = var.flux_install_components
+  # components_extra = var.flux_install_components_extra
+  # toleration_keys = var.flux_install_toleration_keys
+
 }
 
-# Split multi-doc YAML with
-# https://registry.terraform.io/providers/gavinbunney/kubectl/latest
 data "kubectl_file_documents" "install" {
   content = data.flux_install.this.content
 }
@@ -147,7 +157,6 @@ locals {
   }]
 }
 
-# Apply manifests on the cluster
 resource "kubectl_manifest" "install" {
   depends_on = [null_resource.k8s_namespace]
   for_each   = { for v in local.install : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
@@ -167,9 +176,13 @@ resource "github_repository_file" "install" {
 ## flux sync
 
 data "flux_sync" "this" {
-  url         = "ssh://git@github.com/${var.github_owner}/${var.git_repository_name}.git"
+  name        = var.flux_resources_name
+  namespace   = local.k8s_namespace
+  url         = "ssh://git@${var.github_ssh_domain}/${var.github_owner}/${var.git_repository_name}.git"
   target_path = var.git_target_path
   branch      = var.git_branch
+  interval    = var.flux_sync_interval_minutes
+  secret      = var.flux_sync_secret_name
 }
 
 data "kubectl_file_documents" "sync" {
@@ -205,11 +218,11 @@ resource "github_repository_file" "kustomize" {
   overwrite_on_create = true
 }
 
-resource "kubernetes_secret" "sync_ssh" {
+resource "kubernetes_secret" "flux_sync_ssh" {
   depends_on = [github_repository_deploy_key.this]
 
   metadata {
-    name      = data.flux_sync.this.name
+    name      = var.flux_sync_secret_name
     namespace = data.flux_sync.this.namespace
   }
 
