@@ -198,6 +198,7 @@ resource "github_repository_file" "kustomize" {
 }
 
 resource "kubernetes_secret" "sync_ssh" {
+  depends_on = [github_repository_deploy_key.this]
 
   metadata {
     name      = data.flux_sync.this.name
