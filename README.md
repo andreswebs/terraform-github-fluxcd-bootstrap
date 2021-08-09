@@ -48,7 +48,7 @@ kubectl create secret generic \
     --from-literal=known_hosts="$(ssh-keyscan github.com)"
 ```
 
-The key files must be names `identity` (private key) and `identity.pub` (public key).
+The key files must be named `identity` (private key) and `identity.pub` (public key).
 
 After creating the secret, pass its name to the module:
 

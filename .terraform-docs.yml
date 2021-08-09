@@ -18,7 +18,7 @@ content: |-
     {{ include "examples/create-secret.txt" }}
     ```
 
-    The key files must be names `identity` (private key) and `identity.pub` (public key).
+    The key files must be named `identity` (private key) and `identity.pub` (public key).
 
     After creating the secret, pass its name to the module:
 
