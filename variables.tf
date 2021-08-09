@@ -138,12 +138,6 @@ variable "create_namespace" {
   default     = true
 }
 
-variable "create_github_repository" {
-  type        = bool
-  description = "Create the GitHub repository?"
-  default     = false
-}
-
 variable "create_deploy_key" {
   type        = bool
   description = "Create the GitHub deploy key?"

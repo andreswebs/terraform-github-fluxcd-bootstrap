@@ -10,5 +10,5 @@ output "deploy_key" {
 
 output "known_hosts" {
   value       = local.known_hosts
-  description = "Known hosts for ${var.github_ssh_scan_domain}"
+  description = "Known hosts for GitHub's SSH domain"
 }

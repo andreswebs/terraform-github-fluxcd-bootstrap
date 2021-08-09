@@ -1,9 +1,10 @@
 /**
  * Deploys the [FluxCD](https://fluxcd.io/docs/) toolkit on Kubernetes and stores the manifests in an existing GitHub repository.
  * 
- * An SSH public key will be added to the existing GitHub repository.
+ * By default, an SSH public key will be added to the existing GitHub repository.
+ * See the examples to use an externally generated key instead.
  * 
- * **Note**: This module will generate an SSH keypair and it will be stored unencrypted in the Terraform state.
+ * **Note**: If using the default settings, this module will generate an SSH keypair and it will be stored unencrypted in the Terraform state.
  * Make sure that only authorized users have direct access to the Terraform state.
  *
  * It is highly recommended to use a remote state backend supporting encryption at rest. See [References](#references) for more information.

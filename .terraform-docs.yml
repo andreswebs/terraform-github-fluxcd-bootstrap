@@ -11,6 +11,19 @@ content: |-
     {{ include "examples/main.tf" }}
     ```
 
+    If using an externally generated deploy key, first add the deploy key to the GitHub repository, then create
+    a Kubernetes secret with the contents below:
+
+    ```sh
+    {{ include "examples/create-secret.txt" }}
+    ```
+
+    And pass the name of the Kubernetes secret to the module:
+
+    ```hcl
+    {{ include "examples/external-deploy-key.tf" }}
+    ```
+
     {{ .Footer }}
 
     {{ .Inputs }}
