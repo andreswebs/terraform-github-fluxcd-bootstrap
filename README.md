@@ -16,7 +16,8 @@ Example:
 
 ```hcl
 provider "github" {
-  token = var.github_token # or `GITHUB_TOKEN`
+  token = var.github_token
+  owner = var.github_owner
 }
 
 provider "kubernetes" {
@@ -95,10 +96,10 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [github_repository_deploy_key.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_deploy_key) | resource |
-| [github_repository_file.install](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_file) | resource |
-| [github_repository_file.kustomize](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_file) | resource |
-| [github_repository_file.sync](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_file) | resource |
+| [github_repository_deploy_key.this](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/repository_deploy_key) | resource |
+| [github_repository_file.install](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/repository_file) | resource |
+| [github_repository_file.kustomize](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/repository_file) | resource |
+| [github_repository_file.sync](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/repository_file) | resource |
 | [kubectl_manifest.install](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/resources/manifest) | resource |
 | [kubectl_manifest.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/resources/manifest) | resource |
 | [kubernetes_namespace.flux](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
@@ -108,7 +109,7 @@ No modules.
 | [tls_private_key.this](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |
 | [flux_install.this](https://registry.terraform.io/providers/fluxcd/flux/latest/docs/data-sources/install) | data source |
 | [flux_sync.this](https://registry.terraform.io/providers/fluxcd/flux/latest/docs/data-sources/sync) | data source |
-| [github_repository.this](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/repository) | data source |
+| [github_repository.this](https://registry.terraform.io/providers/hashicorp/github/latest/docs/data-sources/repository) | data source |
 | [kubectl_file_documents.install](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/data-sources/file_documents) | data source |
 | [kubectl_file_documents.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/data-sources/file_documents) | data source |
 | [local_file.known_hosts](https://registry.terraform.io/providers/hashicorp/local/2.1.0/docs/data-sources/file) | data source |

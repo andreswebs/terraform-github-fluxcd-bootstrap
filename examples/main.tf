@@ -1,5 +1,6 @@
 provider "github" {
-  token = var.github_token # or `GITHUB_TOKEN`
+  token = var.github_token
+  owner = var.github_owner
 }
 
 provider "kubernetes" {
