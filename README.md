@@ -48,7 +48,9 @@ kubectl create secret generic \
     --from-literal=known_hosts="$(ssh-keyscan github.com)"
 ```
 
-And pass the name of the Kubernetes secret to the module:
+The key files must be names `identity` (private key) and `identity.pub` (public key).
+
+After creating the secret, pass its name to the module:
 
 ```hcl
 module "fluxcd" {

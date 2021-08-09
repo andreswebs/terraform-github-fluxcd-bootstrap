@@ -18,7 +18,9 @@ content: |-
     {{ include "examples/create-secret.txt" }}
     ```
 
-    And pass the name of the Kubernetes secret to the module:
+    The key files must be names `identity` (private key) and `identity.pub` (public key).
+
+    After creating the secret, pass its name to the module:
 
     ```hcl
     {{ include "examples/external-deploy-key.tf" }}
