@@ -36,7 +36,7 @@ module "fluxcd" {
 }
 ```
 
-If using an externally generated deploy key, first add the deploy key to the GitHub repository, then create
+If using an externally generated deploy key, first add the deploy public key to the GitHub repository (see [instructions](https://docs.github.com/en/developers/overview/managing-deploy-keys#setup-2)). Then create
 a Kubernetes secret with the contents below:
 
 ```sh
