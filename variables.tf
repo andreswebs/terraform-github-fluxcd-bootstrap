@@ -71,7 +71,7 @@ variable "github_deploy_key_title" {
 variable "ssh_known_hosts_file" {
   type        = string
   default     = "/tmp/known_hosts"
-  description = "Path to a temporary file storing GitHub's known hosts"
+  description = "Path to a temporary file used to store GitHub's known hosts during the deployment"
 }
 
 variable "github_deploy_key_readonly" {
