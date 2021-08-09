@@ -62,11 +62,19 @@ locals {
 
 resource "kubernetes_namespace" "flux" {
   count = var.create_namespace ? 1 : 0
+  
   metadata {
     name        = local.k8s_namespace_norm
     labels      = var.k8s_namespace_labels
     annotations = var.k8s_namespace_annotations
   }
+
+  lifecycle {
+    ignore_changes = [
+      metadata[0].labels,
+    ]
+  }
+
 }
 
 locals {
