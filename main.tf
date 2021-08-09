@@ -1,5 +1,5 @@
 /**
- * Deploys the FluxCD toolkit on Kubernetes and stores the manifests in an existing GitHub repository.
+ * Deploys the [FluxCD](https://fluxcd.io/docs/) toolkit on Kubernetes and stores the manifests in an existing GitHub repository.
  * 
  * An SSH public key will be added to the existing GitHub repository.
  * 
@@ -16,7 +16,7 @@ terraform {
   required_providers {
 
     github = {
-      # source  = "integrations/github"
+      # source  = "integrations/github" ## has a bug, falling back to hashicorp/github
       source  = "hashicorp/github"
       version = ">= 4.13.0"
     }
