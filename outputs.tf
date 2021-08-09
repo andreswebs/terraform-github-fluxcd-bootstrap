@@ -4,11 +4,11 @@ output "namespace" {
 }
 
 output "deploy_key" {
-  value       = tls_private_key.this
+  value       = local.deploy_key
   description = "SSH key added to the GitHub repository"
 }
 
 output "known_hosts" {
-  value = data.local_file.known_hosts.content
+  value       = local.known_hosts
   description = "Known hosts for ${var.github_ssh_scan_domain}"
 }

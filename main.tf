@@ -96,18 +96,25 @@ data "github_repository" "this" {
 }
 
 resource "tls_private_key" "this" {
+  count     = var.create_deploy_key ? 1 : 0
   algorithm = "RSA"
   rsa_bits  = 4096
 }
 
+locals {
+  deploy_key = var.create_deploy_key ? tls_private_key.this[0] : null  
+}
+
 resource "github_repository_deploy_key" "this" {
+  count      = var.create_deploy_key ? 1 : 0
   title      = var.github_deploy_key_title
   repository = data.github_repository.this.name
-  key        = tls_private_key.this.public_key_openssh
+  key        = local.deploy_key.public_key_openssh
   read_only  = var.github_deploy_key_readonly
 }
 
 resource "null_resource" "ssh_scan" {
+  count = var.create_deploy_key ? 1 : 0
 
   triggers = {
     timestamp = timestamp()
@@ -120,8 +127,13 @@ resource "null_resource" "ssh_scan" {
 }
 
 data "local_file" "known_hosts" {
+  count      = var.create_deploy_key ? 1 : 0
   depends_on = [null_resource.ssh_scan]
   filename   = var.github_ssh_known_hosts_file
+}
+
+locals {
+  known_hosts = var.create_deploy_key ? data.local_file.known_hosts[0].content : null
 }
 
 ## end github repository
@@ -219,6 +231,7 @@ resource "github_repository_file" "kustomize" {
 }
 
 resource "kubernetes_secret" "flux_sync_ssh" {
+  count      = var.create_deploy_key ? 1 : 0
   depends_on = [github_repository_deploy_key.this]
 
   metadata {
@@ -227,9 +240,9 @@ resource "kubernetes_secret" "flux_sync_ssh" {
   }
 
   data = {
-    "identity"     = tls_private_key.this.private_key_pem
-    "identity.pub" = tls_private_key.this.public_key_openssh
-    "known_hosts"  = data.local_file.known_hosts.content
+    "identity"     = local.deploy_key.private_key_pem
+    "identity.pub" = local.deploy_key.public_key_openssh
+    "known_hosts"  = local.known_hosts
   }
 }
 
