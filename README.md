@@ -3,13 +3,13 @@
 [//]: # (BEGIN_TF_DOCS)
 Deploys the [FluxCD](https://fluxcd.io/docs/) toolkit on Kubernetes and stores the manifests in an existing GitHub repository.
 
-By default, an SSH public key will be added to the existing GitHub repository.
-See the examples to use an externally generated key instead.
-
-**Note**: If using the default settings, this module will generate an SSH keypair and it will be stored unencrypted in the Terraform state.
+**Note**: If using the default settings, this module will generate an SSH key pair and the public key will be added to the existing GitHub repository.
+This key pair will be stored unencrypted in the Terraform state.
 Make sure that only authorized users have direct access to the Terraform state.
 
 It is highly recommended to use a remote state backend supporting encryption at rest. See [References](#references) for more information.
+
+See the [examples](#usage) to use an externally generated key instead.
 
 ## Usage
 
@@ -41,10 +41,10 @@ a Kubernetes secret with the contents below:
 
 ```sh
 kubectl create secret generic \
-    flux-system               ## use the same name as in the TF module 
-    --namespace flux-system   ## use the same namespace as in the TF module \
-    --from-file=identity      ## the private key file, must be named 'identity'
-    --from-file=identity.pub  ## the public key file, must be named 'identity.pub'
+    flux-system \
+    --namespace flux-system \
+    --from-file=identity \
+    --from-file=identity.pub \
     --from-literal=known_hosts="$(ssh-keyscan github.com)"
 ```
 
