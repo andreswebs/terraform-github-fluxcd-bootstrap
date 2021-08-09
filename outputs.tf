@@ -3,7 +3,7 @@ output "namespace" {
   description = "The name (metadata.name) of the namespace"
 }
 
-# output "deploy_key" {
-#   value       = tls_private_key.this
-#   description = "SSH key added to the GitHub repository"
-# }
+output "deploy_key" {
+  value       = tls_private_key.this
+  description = "SSH key added to the GitHub repository"
+}
