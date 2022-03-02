@@ -1,6 +1,5 @@
 # terraform-github-fluxcd-bootstrap
 
-[//]: # (BEGIN_TF_DOCS)
 Deploys the [FluxCD](https://fluxcd.io/docs/) toolkit on Kubernetes and stores the manifests in an existing GitHub repository.
 
 **Note**: If using the default settings, this module will generate an SSH key pair and the public key will be added to the existing GitHub repository.
@@ -10,6 +9,9 @@ Make sure that only authorized users have direct access to the Terraform state.
 It is highly recommended to use a remote state backend supporting encryption at rest. See [References](#references) for more information.
 
 See the [examples](#usage) to use an externally generated key instead.
+
+[//]: # (BEGIN_TF_DOCS)
+
 
 ## Usage
 
@@ -123,7 +125,7 @@ No modules.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.0 |
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | >= 0.2.2 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | >= 4.13.0 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | >= 1.11.3 |
