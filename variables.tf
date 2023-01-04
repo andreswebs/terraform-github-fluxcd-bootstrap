@@ -106,7 +106,7 @@ variable "flux_resources_name" {
 
 variable "flux_image_pull_secrets" {
   type        = string
-  default     = ""
+  default     = "" #tfsec:ignore:general-secrets-sensitive-in-variable
   description = "Kubernetes secret name used for pulling the toolkit images from a private registry"
 }
 
