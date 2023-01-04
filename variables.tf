@@ -99,8 +99,8 @@ variable "flux_registry" {
 }
 
 variable "flux_resources_name" {
-  type = string
-  default = "flux-system"
+  type        = string
+  default     = "flux-system"
   description = "The name of generated Kubernetes resources"
 }
 
@@ -117,8 +117,8 @@ variable "flux_install_network_policy" {
 }
 
 variable "flux_sync_secret_name" {
-  type = string
-  default = "flux-system"
+  type        = string
+  default     = "flux-system" #tfsec:ignore:general-secrets-sensitive-in-variable
   description = "The name of the secret that is referenced by GitRepository as SecretRef"
 }
 
