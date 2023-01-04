@@ -113,35 +113,35 @@ No modules.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_flux"></a> [flux](#provider\_flux) | >= 0.2.2 |
-| <a name="provider_github"></a> [github](#provider\_github) | >= 4.13.0 |
-| <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | >= 1.11.3 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | >= 2.4.1 |
-| <a name="provider_local"></a> [local](#provider\_local) | >= 2.1.0 |
-| <a name="provider_null"></a> [null](#provider\_null) | >= 3.1.0 |
-| <a name="provider_tls"></a> [tls](#provider\_tls) | >= 3.1.0 |
+| <a name="provider_flux"></a> [flux](#provider\_flux) | ~> 0.22 |
+| <a name="provider_github"></a> [github](#provider\_github) | ~> 5.0 |
+| <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | ~> 1.14 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | ~> 2.16 |
+| <a name="provider_local"></a> [local](#provider\_local) | ~> 2.2 |
+| <a name="provider_null"></a> [null](#provider\_null) | ~> 3.2 |
+| <a name="provider_tls"></a> [tls](#provider\_tls) | ~> 4.0 |
 
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.0 |
-| <a name="requirement_flux"></a> [flux](#requirement\_flux) | >= 0.2.2 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | >= 4.13.0 |
-| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | >= 1.11.3 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.4.1 |
-| <a name="requirement_local"></a> [local](#requirement\_local) | >= 2.1.0 |
-| <a name="requirement_null"></a> [null](#requirement\_null) | >= 3.1.0 |
-| <a name="requirement_tls"></a> [tls](#requirement\_tls) | >= 3.1.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.3 |
+| <a name="requirement_flux"></a> [flux](#requirement\_flux) | ~> 0.22 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | ~> 5.0 |
+| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | ~> 1.14 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 2.16 |
+| <a name="requirement_local"></a> [local](#requirement\_local) | ~> 2.2 |
+| <a name="requirement_null"></a> [null](#requirement\_null) | ~> 3.2 |
+| <a name="requirement_tls"></a> [tls](#requirement\_tls) | ~> 4.0 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [github_repository_deploy_key.this](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/repository_deploy_key) | resource |
-| [github_repository_file.install](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/repository_file) | resource |
-| [github_repository_file.kustomize](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/repository_file) | resource |
-| [github_repository_file.sync](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/repository_file) | resource |
+| [github_repository_deploy_key.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_deploy_key) | resource |
+| [github_repository_file.install](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_file) | resource |
+| [github_repository_file.kustomize](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_file) | resource |
+| [github_repository_file.sync](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_file) | resource |
 | [kubectl_manifest.install](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/resources/manifest) | resource |
 | [kubectl_manifest.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/resources/manifest) | resource |
 | [kubernetes_namespace.flux](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
@@ -151,7 +151,7 @@ No modules.
 | [tls_private_key.this](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |
 | [flux_install.this](https://registry.terraform.io/providers/fluxcd/flux/latest/docs/data-sources/install) | data source |
 | [flux_sync.this](https://registry.terraform.io/providers/fluxcd/flux/latest/docs/data-sources/sync) | data source |
-| [github_repository.this](https://registry.terraform.io/providers/hashicorp/github/latest/docs/data-sources/repository) | data source |
+| [github_repository.this](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/repository) | data source |
 | [kubectl_file_documents.install](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/data-sources/file_documents) | data source |
 | [kubectl_file_documents.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/data-sources/file_documents) | data source |
 | [local_file.known_hosts](https://registry.terraform.io/providers/hashicorp/local/latest/docs/data-sources/file) | data source |

@@ -1,43 +1,44 @@
 terraform {
 
-  required_version = ">= 1.1.0"
+  required_version = "~> 1.3"
 
   required_providers {
 
     github = {
-      # source  = "integrations/github" ## has a bug, falling back to hashicorp/github
-      source  = "hashicorp/github"
-      version = ">= 4.13.0"
+      source  = "integrations/github" ## has a bug, falling back to hashicorp/github
+      version = "~> 5.0"
+      # source  = "hashicorp/github"
+      # version = ">= 4.13.0"
     }
 
     tls = {
       source  = "hashicorp/tls"
-      version = ">= 3.1.0"
+      version = "~> 4.0"
     }
 
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = ">= 2.4.1"
+      version = "~> 2.16"
     }
 
     kubectl = {
       source  = "gavinbunney/kubectl"
-      version = ">= 1.11.3"
+      version = "~> 1.14"
     }
 
     flux = {
       source  = "fluxcd/flux"
-      version = ">= 0.2.2"
+      version = "~> 0.22"
     }
 
     local = {
       source  = "hashicorp/local"
-      version = ">= 2.1.0"
+      version = "~> 2.2"
     }
 
     null = {
       source  = "hashicorp/null"
-      version = ">= 3.1.0"
+      version = "~> 3.2"
     }
 
   }
