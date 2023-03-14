@@ -113,7 +113,7 @@ No modules.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_flux"></a> [flux](#provider\_flux) | ~> 0.22 |
+| <a name="provider_flux"></a> [flux](#provider\_flux) | ~> 0.25.1 |
 | <a name="provider_github"></a> [github](#provider\_github) | ~> 5.0 |
 | <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | ~> 1.14 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | ~> 2.16 |
@@ -126,7 +126,7 @@ No modules.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.3 |
-| <a name="requirement_flux"></a> [flux](#requirement\_flux) | ~> 0.22 |
+| <a name="requirement_flux"></a> [flux](#requirement\_flux) | ~> 0.25.1 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | ~> 5.0 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | ~> 1.14 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 2.16 |
