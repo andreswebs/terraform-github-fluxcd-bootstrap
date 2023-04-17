@@ -12,3 +12,8 @@ output "known_hosts" {
   value       = local.known_hosts
   description = "Known hosts for GitHub's SSH domain"
 }
+
+output "github_repository" {
+  value       = data.github_repository.this
+  description = "GitHub repository used by flux"
+}

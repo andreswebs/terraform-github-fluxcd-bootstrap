@@ -80,6 +80,22 @@ locals {
   known_hosts = var.create_deploy_key ? data.local_file.known_hosts[0].content : null
 }
 
+resource "kubernetes_secret" "flux_ssh" {
+  count      = var.create_deploy_key ? 1 : 0
+  depends_on = [github_repository_deploy_key.this]
+
+  metadata {
+    name      = var.flux_secret_name
+    namespace = local.k8s_namespace
+  }
+
+  data = {
+    "identity"     = local.deploy_key.private_key_pem
+    "identity.pub" = local.deploy_key.public_key_openssh
+    "known_hosts"  = local.known_hosts
+  }
+}
+
 ## end github repository
 
 ## flux install
@@ -94,12 +110,9 @@ data "flux_install" "this" {
   log_level            = var.flux_log_level
   registry             = var.flux_registry
   image_pull_secrets   = var.flux_image_pull_secrets
-
-  ## TODO:
-  # components = var.flux_install_components
-  # components_extra = var.flux_install_components_extra
-  # toleration_keys = var.flux_install_toleration_keys
-
+  components           = var.flux_install_components
+  components_extra     = var.flux_install_components_extra
+  toleration_keys      = var.flux_install_toleration_keys
 }
 
 data "kubectl_file_documents" "install" {
@@ -172,22 +185,6 @@ resource "github_repository_file" "kustomize" {
   content             = data.flux_sync.this.kustomize_content
   branch              = var.git_branch
   overwrite_on_create = true
-}
-
-resource "kubernetes_secret" "flux_sync_ssh" {
-  count      = var.create_deploy_key ? 1 : 0
-  depends_on = [github_repository_deploy_key.this]
-
-  metadata {
-    name      = var.flux_sync_secret_name
-    namespace = data.flux_sync.this.namespace
-  }
-
-  data = {
-    "identity"     = local.deploy_key.private_key_pem
-    "identity.pub" = local.deploy_key.public_key_openssh
-    "known_hosts"  = local.known_hosts
-  }
 }
 
 ## end flux sync

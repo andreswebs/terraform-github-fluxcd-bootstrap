@@ -76,12 +76,15 @@ module "fluxcd" {
 | <a name="input_create_deploy_key"></a> [create\_deploy\_key](#input\_create\_deploy\_key) | Create the GitHub deploy key? | `bool` | `true` | no |
 | <a name="input_create_namespace"></a> [create\_namespace](#input\_create\_namespace) | Create the Kubernetes namespace? | `bool` | `true` | no |
 | <a name="input_flux_image_pull_secrets"></a> [flux\_image\_pull\_secrets](#input\_flux\_image\_pull\_secrets) | Kubernetes secret name used for pulling the toolkit images from a private registry | `string` | `""` | no |
+| <a name="input_flux_install_components"></a> [flux\_install\_components](#input\_flux\_install\_components) | Toolkit components to include in the install manifests | `list(string)` | <pre>[<br>  "source-controller",<br>  "kustomize-controller",<br>  "helm-controller",<br>  "notification-controller"<br>]</pre> | no |
+| <a name="input_flux_install_components_extra"></a> [flux\_install\_components\_extra](#input\_flux\_install\_components\_extra) | List of extra components to include in the install manifests | `list(string)` | `[]` | no |
 | <a name="input_flux_install_network_policy"></a> [flux\_install\_network\_policy](#input\_flux\_install\_network\_policy) | Deny ingress access to the toolkit controllers from other namespaces using network policies? | `bool` | `true` | no |
+| <a name="input_flux_install_toleration_keys"></a> [flux\_install\_toleration\_keys](#input\_flux\_install\_toleration\_keys) | List of toleration keys used to schedule the components pods onto nodes with matching tailist | `list(string)` | `[]` | no |
 | <a name="input_flux_log_level"></a> [flux\_log\_level](#input\_flux\_log\_level) | Log level for Flux toolkit components | `string` | `"info"` | no |
 | <a name="input_flux_registry"></a> [flux\_registry](#input\_flux\_registry) | Container registry from where the Flux toolkit images are pulled | `string` | `"ghcr.io/fluxcd"` | no |
 | <a name="input_flux_resources_name"></a> [flux\_resources\_name](#input\_flux\_resources\_name) | The name of generated Kubernetes resources | `string` | `"flux-system"` | no |
+| <a name="input_flux_secret_name"></a> [flux\_secret\_name](#input\_flux\_secret\_name) | The name of the secret that is referenced by `GitRepository`, used by flux to deploy to the git repository | `string` | `"flux-system"` | no |
 | <a name="input_flux_sync_interval_minutes"></a> [flux\_sync\_interval\_minutes](#input\_flux\_sync\_interval\_minutes) | Sync interval in minutes | `number` | `1` | no |
-| <a name="input_flux_sync_secret_name"></a> [flux\_sync\_secret\_name](#input\_flux\_sync\_secret\_name) | The name of the secret that is referenced by GitRepository as SecretRef | `string` | `"flux-system"` | no |
 | <a name="input_flux_version"></a> [flux\_version](#input\_flux\_version) | FluxCD version; defaults to the latest available | `string` | `null` | no |
 | <a name="input_flux_watch_all_namespaces"></a> [flux\_watch\_all\_namespaces](#input\_flux\_watch\_all\_namespaces) | Watch for custom resources in all namespaces? | `bool` | `true` | no |
 | <a name="input_git_branch"></a> [git\_branch](#input\_git\_branch) | Git branch | `string` | `"main"` | no |
@@ -106,6 +109,7 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_deploy_key"></a> [deploy\_key](#output\_deploy\_key) | SSH key added to the GitHub repository |
+| <a name="output_github_repository"></a> [github\_repository](#output\_github\_repository) | GitHub repository used by flux |
 | <a name="output_known_hosts"></a> [known\_hosts](#output\_known\_hosts) | Known hosts for GitHub's SSH domain |
 | <a name="output_namespace"></a> [namespace](#output\_namespace) | The name (metadata.name) of the namespace |
 
@@ -145,7 +149,7 @@ No modules.
 | [kubectl_manifest.install](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/resources/manifest) | resource |
 | [kubectl_manifest.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/resources/manifest) | resource |
 | [kubernetes_namespace.flux](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
-| [kubernetes_secret.flux_sync_ssh](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
+| [kubernetes_secret.flux_ssh](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [null_resource.k8s_namespace](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.ssh_scan](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [tls_private_key.this](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |

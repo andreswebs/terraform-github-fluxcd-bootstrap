@@ -116,10 +116,33 @@ variable "flux_install_network_policy" {
   description = "Deny ingress access to the toolkit controllers from other namespaces using network policies?"
 }
 
-variable "flux_sync_secret_name" {
+variable "flux_install_components" {
+  type = list(string)
+  default = [
+    "source-controller",
+    "kustomize-controller",
+    "helm-controller",
+    "notification-controller"
+  ]
+  description = "Toolkit components to include in the install manifests"
+}
+
+variable "flux_install_components_extra" {
+  type        = list(string)
+  default     = []
+  description = "List of extra components to include in the install manifests"
+}
+
+variable "flux_install_toleration_keys" {
+  type        = list(string)
+  default     = []
+  description = "List of toleration keys used to schedule the components pods onto nodes with matching tailist"
+}
+
+variable "flux_secret_name" {
   type        = string
   default     = "flux-system" #tfsec:ignore:general-secrets-sensitive-in-variable
-  description = "The name of the secret that is referenced by GitRepository as SecretRef"
+  description = "The name of the secret that is referenced by `GitRepository`, used by flux to deploy to the git repository"
 }
 
 variable "flux_sync_interval_minutes" {
