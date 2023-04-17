@@ -43,8 +43,6 @@ data "github_repository" "this" {
 resource "tls_private_key" "this" {
   count     = var.create_deploy_key ? 1 : 0
   algorithm = "ED25519"
-  # algorithm = "RSA"
-  # rsa_bits  = 4096
 }
 
 locals {
